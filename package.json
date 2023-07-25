@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/ardhi/bajo-db-mongodb/issues"
   },
-  "homepage": "https://github.com/ardhi/bajo-db-mongodb#readme"
+  "homepage": "https://github.com/ardhi/bajo-db-mongodb#readme",
+  "dependencies": {
+    "mongodb": "^5.7.0"
+  }
 }
