@@ -1,6 +1,7 @@
 import { MongoClient } from 'mongodb'
+import collExists from '../method/coll-exists.js'
 
-async function instancing ({ connection, schemas, noRebuild }) {
+async function instantiation ({ connection, schemas, noRebuild }) {
   const { importPkg } = this.bajo.helper
   const { pick } = await importPkg('lodash-es')
   this.bajoDbMongodb.instances = this.bajoDbMongodb.instances || []
@@ -14,6 +15,12 @@ async function instancing ({ connection, schemas, noRebuild }) {
   instance.client = new MongoClient(url, connection.options || {})
   instance.db = instance.client.db(connection.database)
   this.bajoDbMongodb.instances.push(instance)
+  if (noRebuild) return
+  for (const schema of schemas) {
+    const exists = await collExists.call(this, schema)
+    if (exists) return
+    await instance.db.createCollection(schema.collName)
+  }
 }
 
-export default instancing
+export default instantiation
