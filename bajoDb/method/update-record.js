@@ -7,7 +7,7 @@ async function updateRecord ({ schema, id, body, options } = {}) {
   const coll = instance.db.collection(schema.collName)
   await coll.updateOne({ _id: old._id }, { $set: body })
   const result = await getRecord.call(this, { schema, id })
-  return { old, new: result }
+  return { old: old.data, new: result.data }
 }
 
 export default updateRecord

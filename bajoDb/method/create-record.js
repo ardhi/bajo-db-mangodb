@@ -7,8 +7,7 @@ async function createRecord ({ schema, body, options = {} } = {}) {
   delete body.id
   const coll = instance.db.collection(schema.collName)
   const resp = await coll.insertOne(body)
-  const result = await getRecord.call(this, { schema, id: resp.insertedId, options })
-  return { data: result }
+  return await getRecord.call(this, { schema, id: resp.insertedId })
 }
 
 export default createRecord

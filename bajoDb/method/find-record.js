@@ -5,7 +5,7 @@ async function findRecord ({ schema, filter = {}, options = {} } = {}) {
   const { limit, skip, query, sort, page } = await prepPagination(filter, schema)
   const criteria = query ? query.toJSON() : {}
   const coll = instance.db.collection(schema.collName)
-  const count = await coll.countDocuments(criteria)
+  const count = options.dataOnly ? 0 : (await coll.countDocuments(criteria))
   const cursor = coll.find(criteria).limit(limit).skip(skip)
   if (sort) cursor.sort(sort)
   const results = []
