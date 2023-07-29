@@ -1,5 +1,6 @@
 import { MongoClient } from 'mongodb'
-import collExists from '../method/coll-exists.js'
+import collCreate from '../method/coll/create.js'
+import collExists from '../method/coll/exists.js'
 
 async function instantiation ({ connection, schemas, noRebuild }) {
   const { importPkg } = this.bajo.helper
@@ -19,7 +20,7 @@ async function instantiation ({ connection, schemas, noRebuild }) {
   for (const schema of schemas) {
     const exists = await collExists.call(this, schema)
     if (exists) return
-    await instance.db.createCollection(schema.collName)
+    await collCreate.call(this, schema)
   }
 }
 

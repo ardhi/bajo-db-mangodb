@@ -1,4 +1,4 @@
-async function findRecord ({ schema, filter = {}, options = {} } = {}) {
+async function find ({ schema, filter = {}, options = {} } = {}) {
   const { getInfo } = this.bajoDb.helper
   const { instance } = await getInfo(schema)
   const { prepPagination } = this.bajoDb.helper
@@ -15,4 +15,4 @@ async function findRecord ({ schema, filter = {}, options = {} } = {}) {
   return { data: results, page, limit, count, pages: Math.ceil(count / limit) }
 }
 
-export default findRecord
+export default find
