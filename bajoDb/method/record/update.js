@@ -4,7 +4,7 @@ async function update ({ schema, id, body, options } = {}) {
   const { getInfo } = this.bajoDb.helper
   const { instance } = await getInfo(schema)
   const old = await getRecord.call(this, { schema, id })
-  const coll = instance.db.collection(schema.collName)
+  const coll = instance.db.collection(schema.repoName)
   await coll.updateOne({ _id: id }, { $set: body })
   const result = await getRecord.call(this, { schema, id })
   return { oldData: old.data, data: result.data }
