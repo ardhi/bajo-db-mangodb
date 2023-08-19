@@ -3,7 +3,7 @@ async function count ({ schema, filter = {}, options = {} } = {}) {
   const { instance } = await getInfo(schema)
   const { prepPagination } = this.bajoDb.helper
   const { query } = await prepPagination(filter, schema)
-  const criteria = query ? query.toJSON() : {}
+  const criteria = query ?? {}
   const coll = instance.db.collection(schema.repoName)
   const count = await coll.countDocuments(criteria)
   return { data: count }
