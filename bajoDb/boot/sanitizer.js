@@ -5,7 +5,7 @@ async function sanitizer (conn) {
     conn.host = conn.host ?? 'localhost'
     conn.port = conn.port ?? 27017
   }
-  if (!conn.database) fatal('\'%s@%s\' key is required', 'database', conn.name, { code: 'BAJODBMONGODB_MISSING_CONNECTION_DATABASE', payload: conn })
+  if (!conn.database) fatal('\'%s@%s\' key is required', 'database', conn.name, { payload: conn })
   const result = pick(conn, ['type', 'name', 'driver', 'host', 'port', 'user', 'password', 'database'])
   return result
 }
