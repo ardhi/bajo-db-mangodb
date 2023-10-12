@@ -5,7 +5,7 @@ async function create ({ schema, body, options = {} } = {}) {
   const { instance } = await getInfo(schema)
   body._id = body.id
   delete body.id
-  const coll = instance.db.collection(schema.repoName)
+  const coll = instance.db.collection(schema.collName)
   const resp = await coll.insertOne(body)
   return await getRecord.call(this, { schema, id: resp.insertedId })
 }

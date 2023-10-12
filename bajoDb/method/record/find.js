@@ -4,7 +4,7 @@ async function find ({ schema, filter = {}, options = {} } = {}) {
   const { prepPagination } = this.bajoDb.helper
   const { limit, skip, query, sort, page } = await prepPagination(filter, schema)
   const criteria = query ?? {}
-  const coll = instance.db.collection(schema.repoName)
+  const coll = instance.db.collection(schema.collName)
   const count = options.dataOnly ? 0 : (await coll.countDocuments(criteria))
   const cursor = coll.find(criteria).limit(limit).skip(skip)
   if (sort) cursor.sort(sort)
