@@ -1,4 +1,4 @@
-async function sanitizer (conn) {
+async function connSanitizer (conn) {
   const { importPkg, fatal } = this.bajo.helper
   const { pick } = await importPkg('lodash-es')
   if (!conn.url) {
@@ -10,4 +10,4 @@ async function sanitizer (conn) {
   return result
 }
 
-export default sanitizer
+export default connSanitizer
