@@ -1,5 +1,6 @@
 async function find ({ schema, filter = {}, options = {} } = {}) {
-  const { getInfo } = this.bajoDb.helper
+  const { getInfo, importPkg } = this.bajoDb.helper
+  const { omit } = await importPkg('lodash-es')
   const { instance } = await getInfo(schema)
   const { prepPagination } = this.bajoDb.helper
   const { dataOnly, noCount } = options
@@ -14,7 +15,9 @@ async function find ({ schema, filter = {}, options = {} } = {}) {
   for await (const r of cursor) {
     results.push(r)
   }
-  return { data: results, page, limit, count, pages: Math.ceil(count / limit) }
+  let result = { data: results, page, limit, count, pages: Math.ceil(count / limit) }
+  if (noCount) result = omit(result, ['count', 'pages'])
+  return result
 }
 
 export default find
