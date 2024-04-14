@@ -3,12 +3,11 @@ async function find ({ schema, filter = {}, options = {} } = {}) {
   const { omit } = await importPkg('lodash-es')
   const { instance } = await getInfo(schema)
   const { prepPagination } = this.bajoDb.helper
-  const { dataOnly, noCount } = options
   const { limit, skip, query, sort, page } = await prepPagination(filter, schema)
   const criteria = query ?? {}
   const coll = instance.db.collection(schema.collName)
   let count = 0
-  if (!noCount && !dataOnly) count = await coll.countDocuments(criteria)
+  if (options.count && !options.dataOnly) count = await coll.countDocuments(criteria)
   const cursor = coll.find(criteria).limit(limit).skip(skip)
   if (sort) cursor.sort(sort)
   const results = []
@@ -16,7 +15,7 @@ async function find ({ schema, filter = {}, options = {} } = {}) {
     results.push(r)
   }
   let result = { data: results, page, limit, count, pages: Math.ceil(count / limit) }
-  if (noCount) result = omit(result, ['count', 'pages'])
+  if (!options.count) result = omit(result, ['count', 'pages'])
   return result
 }
 
