@@ -1,6 +1,6 @@
 async function exists (schema) {
   const { getInfo } = this.bajoDb.helper
-  const { instance } = await getInfo(schema)
+  const { instance } = getInfo(schema)
   return !!(instance.db.listCollections({ name: schema.collName }).hasNext())
 }
 

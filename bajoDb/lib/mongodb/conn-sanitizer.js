@@ -1,6 +1,6 @@
 async function connSanitizer (conn) {
-  const { importPkg, fatal } = this.bajo.helper
-  const { pick } = await importPkg('lodash-es')
+  const { fatal } = this.bajo.helper
+  const { pick } = this.bajo.helper._
   if (!conn.url) {
     conn.host = conn.host ?? 'localhost'
     conn.port = conn.port ?? 27017

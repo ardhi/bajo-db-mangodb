@@ -1,8 +1,7 @@
 async function create (schema) {
-  const { importPkg } = this.bajo.helper
   const { getInfo } = this.bajoDb.helper
-  const { instance } = await getInfo(schema)
-  const { reduce } = await importPkg('lodash-es')
+  const { instance } = getInfo(schema)
+  const { reduce } = this.bajo.helper._
   await instance.db.createCollection(schema.collName)
   const coll = instance.db.collection(schema.collName)
   for (const p of schema.properties) {

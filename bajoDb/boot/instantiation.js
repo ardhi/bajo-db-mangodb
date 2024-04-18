@@ -3,8 +3,7 @@ import collCreate from '../method/coll/create.js'
 import collExists from '../method/coll/exists.js'
 
 async function instantiation ({ connection, schemas, noRebuild }) {
-  const { importPkg } = this.bajo.helper
-  const { pick } = await importPkg('lodash-es')
+  const { pick } = this.bajo.helper._
   this.bajoDbMongodb.instances = this.bajoDbMongodb.instances ?? []
   const instance = pick(connection, ['name', 'type'])
   let url = connection.url
