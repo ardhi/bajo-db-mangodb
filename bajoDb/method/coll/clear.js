@@ -1,4 +1,4 @@
-async function clear ({ schema, options = {} } = {}) {
+async function clear ({ schema, options = {} }) {
   const { getInfo } = this.bajoDb.helper
   const { instance } = getInfo(schema)
   const coll = instance.db.collection(schema.collName)
