@@ -1,7 +1,7 @@
 import getRecord from './get.js'
 
-async function create ({ schema, body, options = {} } = {}) {
-  const { getInfo } = this.bajoDb.helper
+async function recordCreate ({ schema, body, options = {} } = {}) {
+  const { getInfo } = this.app.bajoDb
   const { noResult } = options
   const { instance } = getInfo(schema)
   body._id = body.id
@@ -12,4 +12,4 @@ async function create ({ schema, body, options = {} } = {}) {
   return await getRecord.call(this, { schema, id: resp.insertedId })
 }
 
-export default create
+export default recordCreate

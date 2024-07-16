@@ -1,6 +1,6 @@
 {
   "name": "bajo-db-mongodb",
-  "version": "0.3.2",
+  "version": "1.0.0",
   "description": "Bajo DB MongoDB driver for Bajo Framework",
   "main": "index.js",
   "scripts": {
@@ -26,6 +26,6 @@
   },
   "homepage": "https://github.com/ardhi/bajo-db-mongodb#readme",
   "dependencies": {
-    "mongodb": "^5.7.0"
+    "mongodb": "^6.8.0"
   }
 }

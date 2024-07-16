@@ -1,7 +1,7 @@
-async function exists ({ schema, options = {} }) {
-  const { getInfo } = this.bajoDb.helper
+async function collExists ({ schema, options = {} }) {
+  const { getInfo } = this.app.bajoDb
   const { instance } = getInfo(schema)
   return !!(instance.db.listCollections({ name: schema.collName }).hasNext())
 }
 
-export default exists
+export default collExists

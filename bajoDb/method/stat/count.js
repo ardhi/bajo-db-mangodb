@@ -1,5 +1,5 @@
-async function count ({ schema, filter = {}, options = {} }) {
-  const { getInfo } = this.bajoDb.helper
+async function recordCount ({ schema, filter = {}, options = {} }) {
+  const { getInfo } = this.app.bajoDb
   const { instance } = getInfo(schema)
   const criteria = filter.query ?? {}
   const coll = instance.db.collection(schema.collName)
@@ -7,4 +7,4 @@ async function count ({ schema, filter = {}, options = {} }) {
   return { data: count }
 }
 
-export default count
+export default recordCount

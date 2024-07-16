@@ -1,7 +1,7 @@
-async function create ({ schema, options = {} }) {
-  const { getInfo } = this.bajoDb.helper
+async function collCreate ({ schema, options = {} }) {
+  const { getInfo } = this.app.bajoDb
   const { instance } = getInfo(schema)
-  const { reduce } = this.bajo.helper._
+  const { reduce } = this.app.bajo
   await instance.db.createCollection(schema.collName)
   const coll = instance.db.collection(schema.collName)
   for (const p of schema.properties) {
@@ -13,4 +13,4 @@ async function create ({ schema, options = {} }) {
   }
 }
 
-export default create
+export default collCreate

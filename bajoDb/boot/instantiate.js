@@ -2,9 +2,9 @@ import { MongoClient } from 'mongodb'
 import collCreate from '../method/coll/create.js'
 import collExists from '../method/coll/exists.js'
 
-async function instantiation ({ connection, schemas, noRebuild }) {
-  const { pick } = this.bajo.helper._
-  this.bajoDbMongodb.instances = this.bajoDbMongodb.instances ?? []
+async function instantiate ({ connection, schemas, noRebuild }) {
+  const { pick } = this.app.bajo
+  this.instances = this.instances ?? []
   const instance = pick(connection, ['name', 'type'])
   let url = connection.url
   if (!url) {
@@ -14,7 +14,7 @@ async function instantiation ({ connection, schemas, noRebuild }) {
   }
   instance.client = new MongoClient(url, connection.options ?? {})
   instance.db = instance.client.db(connection.database)
-  this.bajoDbMongodb.instances.push(instance)
+  this.instances.push(instance)
   if (noRebuild) return
   for (const schema of schemas) {
     const exists = await collExists.call(this, schema)
@@ -23,4 +23,4 @@ async function instantiation ({ connection, schemas, noRebuild }) {
   }
 }
 
-export default instantiation
+export default instantiate

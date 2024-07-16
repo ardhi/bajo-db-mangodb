@@ -1,8 +1,8 @@
-async function find ({ schema, filter = {}, options = {} } = {}) {
-  const { getInfo } = this.bajoDb.helper
-  const { omit } = this.bajo.helper._
+async function recordFind ({ schema, filter = {}, options = {} } = {}) {
+  const { getInfo } = this.app.bajoDb
+  const { omit } = this.app.bajo
   const { instance } = getInfo(schema)
-  const { prepPagination } = this.bajoDb.helper
+  const { prepPagination } = this.app.bajoDb
   const { limit, skip, sort, page } = await prepPagination(filter, schema)
   const criteria = filter.query ?? {}
   const coll = instance.db.collection(schema.collName)
@@ -19,4 +19,4 @@ async function find ({ schema, filter = {}, options = {} } = {}) {
   return result
 }
 
-export default find
+export default recordFind
