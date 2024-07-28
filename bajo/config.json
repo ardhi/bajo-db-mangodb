@@ -1,4 +1,0 @@
-{
-  "alias": "mongodb",
-  "dependencies": ["bajo-db"]
-}
